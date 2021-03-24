@@ -30,16 +30,16 @@ class LoginFields extends StatelessWidget {
           DefaultSpacer(),
           DefaultSpacer(), // Gambiarra ne
           DefaultFilledButton(
-            onPressed: controller.handleLogin,
+            onPressed: () => controller.handleLogin(context),
             child: DefaultLabel('Login'),
           ),
           DefaultSpacer(),
           DefaultButton(
-            onPressed: controller.handleForgotPassword,
+            onPressed: () => controller.handleForgotPassword(context),
             child: DefaultLabel('Esqueceu a senha?'),
           ),
           DefaultButton(
-            onPressed: controller.handleRegisterNewAccount,
+            onPressed: () => controller.handleRegisterNewAccount(context),
             child: DefaultLabel('Registrar uma nova conta'),
           ),
         ],

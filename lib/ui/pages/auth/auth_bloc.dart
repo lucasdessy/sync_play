@@ -17,17 +17,37 @@ class AuthPageController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
 
-  Future<void> handleLogin() async {
+  Future<void> handleLogin(BuildContext context) async {
     try {
+      if (emailController.text.isEmpty || !emailController.text.isEmail) {
+        throw AppError('Não é possível fazer login',
+            errorDetails: 'Digite um email válido.');
+      }
       await _authService.login(
           email: emailController.text, password: passController.text);
     } on AppError catch (e) {
-      Util.showError(e);
-    } catch (e) {
-      print(e);
+      Util.showError(e, context);
     }
   }
 
-  void handleForgotPassword() {}
-  void handleRegisterNewAccount() {}
+  Future<void> handleForgotPassword(BuildContext context) async {
+    try {
+      if (emailController.text.isEmpty || !emailController.text.isEmail) {
+        throw AppError('Não é possível recuperar a senha',
+            errorDetails: 'Digite um email válido.');
+      }
+      await _authService.recoverPassword(
+        email: emailController.text,
+      );
+      Util.showSnackbar(context,
+          title: 'Sucesso',
+          details: 'Email de recuperação enviado com sucesso');
+    } on AppError catch (e) {
+      Util.showError(e, context);
+    }
+  }
+
+  void handleRegisterNewAccount(BuildContext context) {
+    // TODO go to register account page
+  }
 }
