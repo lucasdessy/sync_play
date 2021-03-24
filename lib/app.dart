@@ -11,6 +11,7 @@ class App extends StatelessWidget {
       title: 'Sync Play',
       getPages: RouteService.getPages,
       initialRoute: RouteService.SPLASH,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
