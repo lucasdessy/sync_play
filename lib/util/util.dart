@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sync_play/models/app_error.dart';
 
 class Util {
@@ -16,7 +15,7 @@ class Util {
             [
               CupertinoDialogAction(
                 onPressed: () {
-                  Get.back();
+                  Navigator.of(context).pop();
                 },
                 child: Text('Ok'),
               )

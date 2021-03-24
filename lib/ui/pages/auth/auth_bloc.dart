@@ -6,10 +6,13 @@ import 'package:sync_play/services/auth_service.dart';
 import 'package:sync_play/services/route_service.dart';
 import 'package:sync_play/util/util.dart';
 
-class AuthBindings implements Bindings {
-  @override
-  void dependencies() {
-    Get.put(AuthPageController());
+class AuthBindings {
+  static void dependencies() {
+    Get.lazyPut(() => AuthPageController(), fenix: true);
+  }
+
+  static void destroy() {
+    Get.delete<AuthPageController>();
   }
 }
 
@@ -50,6 +53,6 @@ class AuthPageController extends GetxController {
   }
 
   void handleRegisterNewAccount(BuildContext context) {
-    Get.toNamed(RouteService.REGISTER);
+    Navigator.of(context).pushNamed(RouteService.REGISTER);
   }
 }

@@ -46,7 +46,7 @@ class RegisterFields extends StatelessWidget {
             DefaultButton(
               onPressed: controller.loading
                   ? null
-                  : controller.handleAlreadyHasAccount,
+                  : () => controller.handleAlreadyHasAccount(context),
               child: Text('Já tem uma conta?'),
             ),
           ],

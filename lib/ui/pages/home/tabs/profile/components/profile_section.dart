@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sync_play/ui/components/default_spacer.dart';
-import 'package:sync_play/ui/components/list_tile_spacer.dart';
+import 'package:sync_play/ui/components/list_tile_builder.dart';
 import 'package:sync_play/ui/pages/home/tabs/profile/profile_tab_controller.dart';
 
 class ProfileSection extends StatelessWidget {
@@ -67,57 +67,62 @@ class ProfileSection extends StatelessWidget {
                   .copyWith(fontSize: 14),
             ),
             DefaultSpacer(),
-            ListTileSpacer(),
-            GestureDetector(
-              onTap: controller.handleGoToEdit,
-              child: ListTile(
-                tileColor: CupertinoTheme.of(context).barBackgroundColor,
-                title: Text(
-                  'Nome',
-                  style: CupertinoTheme.of(context).textTheme.textStyle,
+            ListTileBuilder(
+              children: [
+                GestureDetector(
+                  onTap: () => controller.handleGoToEdit(context),
+                  child: ListTile(
+                    tileColor: CupertinoTheme.of(context).barBackgroundColor,
+                    title: Text(
+                      'Nome',
+                      style: CupertinoTheme.of(context).textTheme.textStyle,
+                    ),
+                    trailing: Icon(
+                      CupertinoIcons.chevron_forward,
+                      color: CupertinoTheme.of(context)
+                          .textTheme
+                          .tabLabelTextStyle
+                          .color,
+                    ),
+                  ),
                 ),
-                trailing: Icon(
-                  CupertinoIcons.chevron_forward,
-                  color: CupertinoTheme.of(context)
-                      .textTheme
-                      .tabLabelTextStyle
-                      .color,
+                GestureDetector(
+                  onTap: () {},
+                  child: ListTile(
+                    tileColor: CupertinoTheme.of(context).barBackgroundColor,
+                    title: Text(
+                      'Histórico',
+                      style: CupertinoTheme.of(context).textTheme.textStyle,
+                    ),
+                    trailing: Icon(
+                      CupertinoIcons.chevron_forward,
+                      color: CupertinoTheme.of(context)
+                          .textTheme
+                          .tabLabelTextStyle
+                          .color,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-            ListTileSpacer(),
-            GestureDetector(
-              onTap: () {},
-              child: ListTile(
-                tileColor: CupertinoTheme.of(context).barBackgroundColor,
-                title: Text(
-                  'Histórico',
-                  style: CupertinoTheme.of(context).textTheme.textStyle,
-                ),
-                trailing: Icon(
-                  CupertinoIcons.chevron_forward,
-                  color: CupertinoTheme.of(context)
-                      .textTheme
-                      .tabLabelTextStyle
-                      .color,
-                ),
-              ),
-            ),
-            ListTileSpacer(),
             DefaultSpacer(),
-            GestureDetector(
-              onTap: () {},
-              child: ListTile(
-                tileColor: CupertinoTheme.of(context).barBackgroundColor,
-                title: Text(
-                  'Sair',
-                  style: CupertinoTheme.of(context)
-                      .textTheme
-                      .textStyle
-                      .copyWith(color: CupertinoColors.destructiveRed),
-                  textAlign: TextAlign.center,
+            ListTileBuilder(
+              children: [
+                GestureDetector(
+                  onTap: () => controller.handleLogout(context),
+                  child: ListTile(
+                    tileColor: CupertinoTheme.of(context).barBackgroundColor,
+                    title: Text(
+                      'Sair',
+                      style: CupertinoTheme.of(context)
+                          .textTheme
+                          .textStyle
+                          .copyWith(color: CupertinoColors.destructiveRed),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           ],
         ),

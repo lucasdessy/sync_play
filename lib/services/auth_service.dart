@@ -5,7 +5,11 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:sync_play/models/app_error.dart';
 import 'package:sync_play/models/fire_user.dart';
+import 'package:sync_play/services/app_service.dart';
 import 'package:sync_play/services/route_service.dart';
+import 'package:sync_play/ui/pages/auth/auth_bloc.dart';
+import 'package:sync_play/ui/pages/home/home_bindings.dart';
+import 'package:sync_play/ui/pages/register/register_bloc.dart';
 import 'package:sync_play/util/single_instance_function.dart';
 
 class AuthService extends GetxService {
@@ -15,7 +19,7 @@ class AuthService extends GetxService {
   final Rx<FireUser?> currentUser = Rx<FireUser?>();
   final RxBool isLoggedin = RxBool();
   final RxBool loading = false.obs;
-
+  final _appService = Get.find<AppService>();
   late final SingleInstanceFunction _loadUserSingle;
   @override
   void onInit() {
@@ -38,11 +42,18 @@ class AuthService extends GetxService {
     _auth.authStateChanges().listen((_user) {
       authUser.value = _user;
       if (_user == null) {
+        print('it is not logged in');
         isLoggedin.value = false;
-        Get.offAllNamed(RouteService.AUTH);
+        HomePageBindings.destroy();
+        _appService.key.currentState!
+            .pushNamedAndRemoveUntil(RouteService.AUTH, (route) => false);
       } else {
+        print('it is logged in');
         isLoggedin.value = true;
-        Get.offAllNamed(RouteService.HOME);
+        AuthBindings.destroy();
+        RegisterPageBindings.destroy();
+        _appService.key.currentState!
+            .pushNamedAndRemoveUntil(RouteService.HOME, (route) => false);
       }
       _loadUserSingle();
     });
@@ -108,6 +119,14 @@ class AuthService extends GetxService {
     } finally {
       setLoading(false);
     }
+  }
+
+  Future<void> logout() async {
+    setLoading(true);
+    print('logging out');
+    await _auth.signOut();
+    currentUser.value = null;
+    setLoading(false);
   }
 
   Future<void> recoverPassword({required String email}) async {

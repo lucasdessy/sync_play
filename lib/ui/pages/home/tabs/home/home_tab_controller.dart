@@ -10,10 +10,10 @@ class HomeTabController extends GetxController {
   }
 
   void handleCreateRoom(BuildContext context) {
-    Get.back();
+    Navigator.of(context).pop();
   }
 
   void handleJoinRoom(BuildContext context) {
-    Get.back();
+    Navigator.of(context).pop();
   }
 }

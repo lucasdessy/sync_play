@@ -4,10 +4,13 @@ import 'package:sync_play/models/app_error.dart';
 import 'package:sync_play/services/auth_service.dart';
 import 'package:sync_play/util/util.dart';
 
-class RegisterPageBindings implements Bindings {
-  @override
-  void dependencies() {
-    Get.put(RegisterPageController());
+class RegisterPageBindings {
+  static void dependencies() {
+    Get.lazyPut(() => RegisterPageController(), fenix: true);
+  }
+
+  static void destroy() {
+    Get.delete<RegisterPageController>();
   }
 }
 
@@ -29,7 +32,7 @@ class RegisterPageController extends GetxController {
     }
   }
 
-  void handleAlreadyHasAccount() {
-    Get.back();
+  void handleAlreadyHasAccount(BuildContext context) {
+    Navigator.of(context).pop();
   }
 }

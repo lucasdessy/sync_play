@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 
 import 'package:sync_play/ui/pages/home/tabs/home/home_tab_controller.dart';
 
@@ -23,7 +22,7 @@ class OptionsSheet extends StatelessWidget {
       ],
       cancelButton: CupertinoActionSheetAction(
         onPressed: () {
-          Get.back();
+          Navigator.of(context).pop();
         },
         child: Text('Dispensar'),
       ),
