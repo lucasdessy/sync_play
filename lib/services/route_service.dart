@@ -1,6 +1,7 @@
 import 'package:get/route_manager.dart';
 import 'package:sync_play/ui/pages/auth/auth_bloc.dart';
 import 'package:sync_play/ui/pages/auth/auth_view.dart';
+import 'package:sync_play/ui/pages/home/home_bindings.dart';
 import 'package:sync_play/ui/pages/home/home_view.dart';
 import 'package:sync_play/ui/pages/register/register_bloc.dart';
 import 'package:sync_play/ui/pages/register/register_view.dart';
@@ -20,6 +21,7 @@ class RouteService {
     GetPage(
       name: HOME,
       page: () => HomeView(),
+      binding: HomePageBindings(),
     ),
     GetPage(
       name: AUTH,
