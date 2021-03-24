@@ -3,33 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:sync_play/ui/pages/home/tabs/home/home_tab.dart';
 import 'package:sync_play/ui/pages/home/tabs/profile/profile_tab.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  int currentIndex = 0;
+  static final tabs = [
+    HomeTab(),
+    ProfileTab(),
+  ];
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-      tabBuilder: (context, index) {
-        switch (index) {
-          case 0:
-            return CupertinoTabView(
-              builder: (ctx) => HomeTab(),
-            );
-          case 1:
-            return CupertinoTabView(
-              builder: (ctx) => ProfileTab(),
-            );
-        }
-        return CupertinoTabView(
-          builder: (ctx) => CupertinoPageScaffold(
-              child: Center(
-            child: Text(
-              'Ocorreu um erro.',
-              style:
-                  CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
-            ),
-          )),
-        );
-      },
-      tabBar: CupertinoTabBar(
+    return Scaffold(
+      body: tabs.elementAt(currentIndex),
+      extendBody: true,
+      bottomNavigationBar: CupertinoTabBar(
+        currentIndex: currentIndex,
         items: [
           BottomNavigationBarItem(
             icon: Icon(
@@ -44,6 +35,11 @@ class HomeView extends StatelessWidget {
             label: 'Perfil',
           ),
         ],
+        onTap: (_index) {
+          setState(() {
+            currentIndex = _index;
+          });
+        },
       ),
     );
   }
