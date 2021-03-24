@@ -1,15 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:sync_play/models/app_error.dart';
+import 'package:sync_play/models/fire_user.dart';
 import 'package:sync_play/services/route_service.dart';
+import 'package:sync_play/util/single_instance_function.dart';
 
 class AuthService extends GetxService {
   final _auth = FirebaseAuth.instance;
-  final Rx<User?> user = Rx<User?>();
+  final _firestore = FirebaseFirestore.instance;
+  final Rx<User?> authUser = Rx<User?>();
+  final Rx<FireUser?> currentUser = Rx<FireUser?>();
   final RxBool isLoggedin = RxBool();
   final RxBool loading = false.obs;
+
+  late final SingleInstanceFunction _loadUserSingle;
+  @override
+  void onInit() {
+    _loadUserSingle = SingleInstanceFunction(() => _loadUser());
+    super.onInit();
+  }
+
   @override
   void onReady() {
     listenUser();
@@ -23,7 +36,7 @@ class AuthService extends GetxService {
   Future<void> listenUser() async {
     await Future.delayed(Duration(seconds: 2));
     _auth.authStateChanges().listen((_user) {
-      user.value = _user;
+      authUser.value = _user;
       if (_user == null) {
         isLoggedin.value = false;
         Get.offAllNamed(RouteService.AUTH);
@@ -31,7 +44,27 @@ class AuthService extends GetxService {
         isLoggedin.value = true;
         Get.offAllNamed(RouteService.HOME);
       }
+      _loadUserSingle();
     });
+  }
+
+  Future<void> _loadUser() async {
+    final _user = authUser();
+    if (_user != null) {
+      final snap = await _firestore.collection('users').doc(_user.uid).get();
+      if (snap.exists) {
+        print('_loadUser: loading existing user...');
+        currentUser.value = FireUser.fromDocument(snap);
+      } else {
+        print('_loadUser: creating new user...');
+        await _createUser(_user.uid);
+        return _loadUser();
+      }
+    }
+  }
+
+  Future<void> _createUser(String userId) async {
+    await _firestore.collection('users').doc(userId).set(FireUser().toJson());
   }
 
   Future<void> register(
