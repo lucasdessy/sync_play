@@ -6,9 +6,24 @@ import 'package:sync_play/models/app_error.dart';
 class Util {
   /// Shows a snackbar. All parameters required.
   static void showSnackbar(BuildContext context,
-      {required String title, required String details}) {
-    Get.snackbar(title, details,
-        colorText: CupertinoTheme.of(context).textTheme.textStyle.color);
+      {required String title, required String details, List<Widget>? actions}) {
+    showCupertinoDialog(
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+              title: Text(title),
+              content: Text(details),
+              actions: actions ??
+                  [
+                    CupertinoDialogAction(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      child: Text('Ok'),
+                    )
+                  ],
+            ));
+    // Get.snackbar(title, details,
+    //     colorText: CupertinoTheme.of(context).textTheme.textStyle.color);
   }
 
   /// Shows a snackbar with error details.
