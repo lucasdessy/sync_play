@@ -16,7 +16,10 @@ class ProfileTabController extends GetxController {
   bool get loading => _authService.loading() ?? false;
   void handleGoToEdit(BuildContext context) {
     showCupertinoModalBottomSheet(
-        context: context, builder: (context) => ProfileEditView());
+        context: context,
+        builder: (context) => ProfileEditView(
+              controller: this,
+            ));
   }
 
   Future<void> handleLogout(BuildContext context) async {
@@ -28,5 +31,13 @@ class ProfileTabController extends GetxController {
     if (willLogout ?? false) {
       await _authService.logout();
     }
+  }
+
+  // TODO make auth service save profile and update Rx variables
+  Future<void> handleSaveProfile(BuildContext context) async {
+    _authService.setLoading(true);
+    await Future.delayed(Duration(seconds: 3));
+    _authService.setLoading(false);
+    Navigator.of(context).pop();
   }
 }

@@ -12,7 +12,6 @@ class OptionsSheet extends StatelessWidget {
       actions: [
         CupertinoActionSheetAction(
           onPressed: () => controller.handleCreateRoom(context),
-          isDefaultAction: true,
           child: Text('Criar nova sala'),
         ),
         CupertinoActionSheetAction(
@@ -21,6 +20,7 @@ class OptionsSheet extends StatelessWidget {
         ),
       ],
       cancelButton: CupertinoActionSheetAction(
+        isDefaultAction: true,
         onPressed: () {
           Navigator.of(context).pop();
         },
