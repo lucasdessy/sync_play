@@ -1,5 +1,6 @@
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/instance_manager.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sync_play/services/auth_service.dart';
 
 class RegisterPageBindings implements Bindings {
   @override
@@ -8,4 +9,15 @@ class RegisterPageBindings implements Bindings {
   }
 }
 
-class RegisterPageController extends GetxController {}
+class RegisterPageController extends GetxController {
+  final _authService = Get.find<AuthService>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
+
+  void handleRegister(BuildContext context) {
+    // TODO
+  }
+  void handleAlreadyHasAccount() {
+    Get.back();
+  }
+}
