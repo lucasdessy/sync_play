@@ -21,11 +21,16 @@ class LoginFields extends StatelessWidget {
             DefaultLabel('E-mail'),
             CupertinoTextField(
               controller: controller.emailController,
+              keyboardType: TextInputType.emailAddress,
+              autofillHints: [AutofillHints.email],
             ),
             DefaultSpacer(),
             DefaultLabel('Senha'),
             CupertinoTextField(
               controller: controller.passController,
+              obscureText: true,
+              keyboardType: TextInputType.visiblePassword,
+              autofillHints: [AutofillHints.password],
             ),
             DefaultSpacer(),
             DefaultSpacer(),

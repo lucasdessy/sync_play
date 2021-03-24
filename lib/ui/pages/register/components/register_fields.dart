@@ -21,11 +21,16 @@ class RegisterFields extends StatelessWidget {
             DefaultLabel('E-mail'),
             CupertinoTextField(
               controller: controller.emailController,
+              keyboardType: TextInputType.emailAddress,
+              autofillHints: [AutofillHints.newUsername],
             ),
             DefaultSpacer(),
             DefaultLabel('Senha'),
             CupertinoTextField(
               controller: controller.passController,
+              obscureText: true,
+              keyboardType: TextInputType.visiblePassword,
+              autofillHints: [AutofillHints.newPassword],
             ),
             DefaultSpacer(),
             DefaultSpacer(),
