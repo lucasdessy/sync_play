@@ -8,22 +8,21 @@ class Util {
   static void showSnackbar(BuildContext context,
       {required String title, required String details, List<Widget>? actions}) {
     showCupertinoDialog(
-        context: context,
-        builder: (context) => CupertinoAlertDialog(
-              title: Text(title),
-              content: Text(details),
-              actions: actions ??
-                  [
-                    CupertinoDialogAction(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      child: Text('Ok'),
-                    )
-                  ],
-            ));
-    // Get.snackbar(title, details,
-    //     colorText: CupertinoTheme.of(context).textTheme.textStyle.color);
+      context: context,
+      builder: (context) => CupertinoAlertDialog(
+        title: Text(title),
+        content: Text(details),
+        actions: actions ??
+            [
+              CupertinoDialogAction(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('Ok'),
+              )
+            ],
+      ),
+    );
   }
 
   /// Shows a snackbar with error details.
