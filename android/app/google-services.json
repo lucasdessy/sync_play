@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "67057942663",
+    "project_id": "sync-play-46e93",
+    "storage_bucket": "sync-play-46e93.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:67057942663:android:51d1e4e6295b3c500c7822",
+        "android_client_info": {
+          "package_name": "net.ddns.syncplay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "67057942663-dn77139d8agrt4pvgfvubdd32l8mquob.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPjsMDJTlcfcx6ErP7fhchbtyH3QQ8aJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "67057942663-dn77139d8agrt4pvgfvubdd32l8mquob.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
