@@ -9,11 +9,15 @@ class AuthService extends GetxService {
   final _auth = FirebaseAuth.instance;
   final Rx<User?> user = Rx<User?>();
   final RxBool isLoggedin = RxBool();
-
+  final RxBool loading = false.obs;
   @override
   void onReady() {
     listenUser();
     super.onReady();
+  }
+
+  void setLoading(bool v) {
+    loading.value = v;
   }
 
   Future<void> listenUser() async {
@@ -33,6 +37,7 @@ class AuthService extends GetxService {
   Future<void> register(
       {required String email, required String password}) async {
     try {
+      setLoading(true);
       await _auth.createUserWithEmailAndPassword(
           email: email.trim(), password: password);
     } on FirebaseAuthException catch (e) {
@@ -46,11 +51,14 @@ class AuthService extends GetxService {
     } catch (e) {
       print(e);
       throw AppError('Ocorreu um erro interno');
+    } finally {
+      setLoading(false);
     }
   }
 
   Future<void> login({required String email, required String password}) async {
     try {
+      setLoading(true);
       await _auth.signInWithEmailAndPassword(
           email: email.trim(), password: password);
     } on FirebaseAuthException catch (e) {
@@ -64,15 +72,20 @@ class AuthService extends GetxService {
     } catch (e) {
       print(e);
       throw AppError('Ocorreu um erro interno');
+    } finally {
+      setLoading(false);
     }
   }
 
   Future<void> recoverPassword({required String email}) async {
     try {
+      setLoading(true);
       await _auth.sendPasswordResetEmail(email: email.trim());
     } catch (e) {
       print(e);
       throw AppError('Ocorreu um erro interno');
+    } finally {
+      setLoading(false);
     }
   }
 }
