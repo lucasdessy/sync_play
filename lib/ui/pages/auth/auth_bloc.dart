@@ -17,7 +17,6 @@ class AuthPageController extends GetxController {
   final _authService = Get.find<AuthService>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
-
   Future<void> handleLogin(BuildContext context) async {
     try {
       if (emailController.text.isEmpty || !emailController.text.isEmail) {

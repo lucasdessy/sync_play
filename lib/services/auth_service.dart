@@ -1,26 +1,31 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:sync_play/models/app_error.dart';
+import 'package:sync_play/services/route_service.dart';
 
 class AuthService extends GetxService {
   final _auth = FirebaseAuth.instance;
-  final Rx<User> user = Rx<User>();
+  final Rx<User?> user = Rx<User?>();
   final RxBool isLoggedin = RxBool();
+
   @override
-  void onInit() {
-    isLoggedin.value = _auth.currentUser != null;
+  void onReady() {
     listenUser();
-    super.onInit();
+    super.onReady();
   }
 
-  void listenUser() {
+  Future<void> listenUser() async {
+    await Future.delayed(Duration(seconds: 2));
     _auth.authStateChanges().listen((_user) {
       user.value = _user;
       if (_user == null) {
         isLoggedin.value = false;
+        Get.offAllNamed(RouteService.AUTH);
       } else {
         isLoggedin.value = true;
+        Get.offAllNamed(RouteService.HOME);
       }
     });
   }
