@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:sync_play/ui/components/default_button.dart';
 import 'package:sync_play/ui/components/default_filled_button.dart';
 import 'package:sync_play/ui/components/default_padding.dart';
@@ -13,36 +14,44 @@ class LoginFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultPadding(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          DefaultLabel('E-mail'),
-          CupertinoTextField(
-            controller: controller.emailController,
-          ),
-          DefaultSpacer(),
-          DefaultLabel('Senha'),
-          CupertinoTextField(
-            controller: controller.passController,
-          ),
-          DefaultSpacer(),
-          DefaultSpacer(),
-          DefaultSpacer(),
-          DefaultSpacer(), // Gambiarra ne
-          DefaultFilledButton(
-            onPressed: () => controller.handleLogin(context),
-            child: Text('Login'),
-          ),
-          DefaultSpacer(),
-          DefaultButton(
-            onPressed: () => controller.handleForgotPassword(context),
-            child: Text('Esqueceu a senha?'),
-          ),
-          DefaultButton(
-            onPressed: () => controller.handleRegisterNewAccount(context),
-            child: Text('Registrar uma nova conta'),
-          ),
-        ],
+      child: Obx(
+        () => Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            DefaultLabel('E-mail'),
+            CupertinoTextField(
+              controller: controller.emailController,
+            ),
+            DefaultSpacer(),
+            DefaultLabel('Senha'),
+            CupertinoTextField(
+              controller: controller.passController,
+            ),
+            DefaultSpacer(),
+            DefaultSpacer(),
+            DefaultSpacer(),
+            DefaultSpacer(), // Gambiarra ne
+            DefaultFilledButton(
+              onPressed: controller.loading
+                  ? null
+                  : () => controller.handleLogin(context),
+              child: Text('Login'),
+            ),
+            DefaultSpacer(),
+            DefaultButton(
+              onPressed: controller.loading
+                  ? null
+                  : () => controller.handleForgotPassword(context),
+              child: Text('Esqueceu a senha?'),
+            ),
+            DefaultButton(
+              onPressed: controller.loading
+                  ? null
+                  : () => controller.handleRegisterNewAccount(context),
+              child: Text('Registrar uma nova conta'),
+            ),
+          ],
+        ),
       ),
     );
   }
