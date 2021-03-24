@@ -25,6 +25,25 @@ class AuthService extends GetxService {
     });
   }
 
+  Future<void> register(
+      {required String email, required String password}) async {
+    try {
+      await _auth.createUserWithEmailAndPassword(
+          email: email.trim(), password: password);
+    } on FirebaseAuthException catch (e) {
+      String? details;
+      if (e.code == 'weak-password') {
+        details = 'Sua senha é muito fraca';
+      } else if (e.code == 'email-already-in-use') {
+        details = 'Email já está em uso';
+      }
+      throw AppError('Erro ao registrar', errorDetails: details);
+    } catch (e) {
+      print(e);
+      throw AppError('Ocorreu um erro interno');
+    }
+  }
+
   Future<void> login({required String email, required String password}) async {
     try {
       await _auth.signInWithEmailAndPassword(
