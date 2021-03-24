@@ -3,6 +3,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get.dart';
 import 'package:sync_play/models/app_error.dart';
 import 'package:sync_play/services/auth_service.dart';
+import 'package:sync_play/services/route_service.dart';
 import 'package:sync_play/util/util.dart';
 
 class AuthBindings implements Bindings {
@@ -48,6 +49,6 @@ class AuthPageController extends GetxController {
   }
 
   void handleRegisterNewAccount(BuildContext context) {
-    // TODO go to register account page
+    Get.toNamed(RouteService.REGISTER);
   }
 }
