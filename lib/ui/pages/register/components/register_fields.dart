@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:sync_play/ui/components/default_button.dart';
 import 'package:sync_play/ui/components/default_filled_button.dart';
 import 'package:sync_play/ui/components/default_padding.dart';
@@ -13,32 +14,38 @@ class RegisterFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultPadding(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          DefaultLabel('E-mail'),
-          CupertinoTextField(
-            controller: controller.emailController,
-          ),
-          DefaultSpacer(),
-          DefaultLabel('Senha'),
-          CupertinoTextField(
-            controller: controller.passController,
-          ),
-          DefaultSpacer(),
-          DefaultSpacer(),
-          DefaultSpacer(),
-          DefaultSpacer(), // Gambiarra ne
-          DefaultFilledButton(
-            onPressed: () => controller.handleRegister(context),
-            child: Text('Registrar'),
-          ),
-          DefaultSpacer(),
-          DefaultButton(
-            onPressed: controller.handleAlreadyHasAccount,
-            child: Text('Já tem uma conta?'),
-          ),
-        ],
+      child: Obx(
+        () => Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            DefaultLabel('E-mail'),
+            CupertinoTextField(
+              controller: controller.emailController,
+            ),
+            DefaultSpacer(),
+            DefaultLabel('Senha'),
+            CupertinoTextField(
+              controller: controller.passController,
+            ),
+            DefaultSpacer(),
+            DefaultSpacer(),
+            DefaultSpacer(),
+            DefaultSpacer(), // Gambiarra ne
+            DefaultFilledButton(
+              onPressed: controller.loading
+                  ? null
+                  : () => controller.handleRegister(context),
+              child: Text('Registrar'),
+            ),
+            DefaultSpacer(),
+            DefaultButton(
+              onPressed: controller.loading
+                  ? null
+                  : controller.handleAlreadyHasAccount,
+              child: Text('Já tem uma conta?'),
+            ),
+          ],
+        ),
       ),
     );
   }

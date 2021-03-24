@@ -15,7 +15,7 @@ class RegisterPageController extends GetxController {
   final _authService = Get.find<AuthService>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
-
+  bool get loading => _authService.loading() ?? false;
   Future<void> handleRegister(BuildContext context) async {
     try {
       if (emailController.text.isEmpty || !emailController.text.isEmail) {
