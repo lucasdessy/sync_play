@@ -40,7 +40,11 @@ class AuthPageController extends GetxController {
 
   Future<void> handleForgotPassword(BuildContext context) async {
     try {
-      if (emailController.text.isEmpty || !emailController.text.isEmail) {
+      if (emailController.text.isEmpty) {
+        throw AppError('Não é possível recuperar a senha',
+            errorDetails: 'Digite um email no campo de email');
+      }
+      if (!emailController.text.isEmail) {
         throw AppError('Não é possível recuperar a senha',
             errorDetails: 'Digite um email válido.');
       }

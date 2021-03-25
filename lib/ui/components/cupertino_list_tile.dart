@@ -18,7 +18,8 @@ class CupertinoListTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: ListTile(
-        tileColor: CupertinoTheme.of(context).barBackgroundColor,
+        tileColor: CupertinoColors.secondarySystemGroupedBackground
+            .resolveFrom(context),
         title: Text(
           title,
           style: textColor == null
@@ -34,11 +35,8 @@ class CupertinoListTile extends StatelessWidget {
             : onTap == null
                 ? null
                 : Icon(
-                    CupertinoIcons.chevron_forward,
-                    color: CupertinoTheme.of(context)
-                        .textTheme
-                        .tabLabelTextStyle
-                        .color,
+                    CupertinoIcons.forward,
+                    color: CupertinoColors.opaqueSeparator.resolveFrom(context),
                   ),
         dense: true,
       ),

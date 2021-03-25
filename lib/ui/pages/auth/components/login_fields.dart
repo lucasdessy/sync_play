@@ -22,7 +22,7 @@ class LoginFields extends StatelessWidget {
             CupertinoTextField(
               controller: controller.emailController,
               keyboardType: TextInputType.emailAddress,
-              autofillHints: [AutofillHints.email],
+              autofillHints: [AutofillHints.username],
             ),
             DefaultSpacer(),
             DefaultLabel('Senha'),

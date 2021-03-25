@@ -7,6 +7,8 @@ class ProfileTab extends GetView<ProfileTabController> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      backgroundColor:
+          CupertinoColors.systemGroupedBackground.resolveFrom(context),
       child: CustomScrollView(
         slivers: [
           CupertinoSliverNavigationBar(

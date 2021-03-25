@@ -15,6 +15,7 @@ class ProfileEditView extends StatelessWidget {
     return WillPopScope(
       onWillPop: () => controller.profileEditViewOnWillPop(context),
       child: CupertinoPageScaffold(
+        backgroundColor: CupertinoColors.systemGroupedBackground,
         navigationBar: CupertinoNavigationBar(
           middle: Text('Editar'),
           automaticallyImplyLeading: false,
@@ -32,10 +33,7 @@ class ProfileEditView extends StatelessWidget {
           child: ListView(
             controller: ModalScrollController.of(context),
             children: [
-              DefaultLabel('Nome'),
-              CupertinoTextField(
-                controller: controller.nameController,
-              )
+              CupertinoFormSection.insetGrouped(children: [Text('a')])
             ],
           ),
         ),
