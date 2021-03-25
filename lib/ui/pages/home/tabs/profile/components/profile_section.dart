@@ -19,36 +19,53 @@ class ProfileSection extends StatelessWidget {
           children: [
             DefaultSpacer(),
             CircleAvatar(
-              radius: 45,
-              backgroundColor:
-                  CupertinoTheme.of(context).textTheme.tabLabelTextStyle.color,
-              backgroundImage: NetworkImage(controller.userPic),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(90),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    width: double.infinity,
-                    height: 20,
-                    color: Colors.black.withOpacity(0.8),
-                    child: Center(
-                      child: Padding(
-                          padding: EdgeInsets.only(bottom: 3),
-                          child: Text(
-                            'EDITAR',
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .copyWith(
-                                    fontSize: 9,
-                                    fontWeight: FontWeight.w100,
-                                    color: Colors.white),
-                          )),
+                radius: 45,
+                backgroundColor: CupertinoTheme.of(context)
+                    .textTheme
+                    .tabLabelTextStyle
+                    .color,
+                backgroundImage: NetworkImage(controller.userPic),
+                child: Stack(
+                  children: [
+                    if (controller.loading)
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(90),
+                        child: Center(
+                          child: Container(
+                            color: Colors.black.withOpacity(0.7),
+                            width: double.infinity,
+                            height: double.infinity,
+                            child: CupertinoActivityIndicator(),
+                          ),
+                        ),
+                      ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(90),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          width: double.infinity,
+                          height: 20,
+                          color: Colors.black.withOpacity(0.8),
+                          child: Center(
+                            child: Padding(
+                                padding: EdgeInsets.only(bottom: 3),
+                                child: Text(
+                                  'EDITAR',
+                                  style: CupertinoTheme.of(context)
+                                      .textTheme
+                                      .textStyle
+                                      .copyWith(
+                                          fontSize: 9,
+                                          fontWeight: FontWeight.w100,
+                                          color: Colors.white),
+                                )),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            ),
+                  ],
+                )),
             DefaultSpacer(),
             Text(
               controller.userName,
