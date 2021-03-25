@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get.dart';
+import 'package:sync_play/models/app_binding.dart';
 import 'package:sync_play/models/app_error.dart';
 import 'package:sync_play/services/auth_service.dart';
 import 'package:sync_play/services/route_service.dart';
 import 'package:sync_play/util/util.dart';
 
-class AuthBindings {
-  static void dependencies() {
+class AuthBindings implements AppBinding {
+  @override
+  void dependencies() {
     Get.lazyPut(() => AuthPageController(), fenix: true);
   }
 
-  static void destroy() {
+  @override
+  void destroy() {
     Get.delete<AuthPageController>();
   }
 }

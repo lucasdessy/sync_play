@@ -23,9 +23,9 @@ class AppService extends GetxService {
   final uuid = Uuid();
 
   void _loadInitialBindings() {
-    HomePageBindings.dependencies();
-    RegisterPageBindings.dependencies();
-    AuthBindings.dependencies();
+    HomePageBindings().dependencies();
+    RegisterPageBindings().dependencies();
+    AuthBindings().dependencies();
   }
 
   @override

@@ -44,14 +44,14 @@ class AuthService extends GetxService {
       if (_user == null) {
         print('it is not logged in');
         isLoggedin.value = false;
-        HomePageBindings.destroy();
+        HomePageBindings().destroy();
         _appService.key.currentState!
             .pushNamedAndRemoveUntil(RouteService.AUTH, (route) => false);
       } else {
         print('it is logged in');
         isLoggedin.value = true;
-        AuthBindings.destroy();
-        RegisterPageBindings.destroy();
+        AuthBindings().destroy();
+        RegisterPageBindings().destroy();
         _appService.key.currentState!
             .pushNamedAndRemoveUntil(RouteService.HOME, (route) => false);
       }

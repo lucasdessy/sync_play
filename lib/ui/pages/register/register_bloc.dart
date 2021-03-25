@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sync_play/models/app_binding.dart';
 import 'package:sync_play/models/app_error.dart';
 import 'package:sync_play/services/auth_service.dart';
 import 'package:sync_play/util/util.dart';
 
-class RegisterPageBindings {
-  static void dependencies() {
+class RegisterPageBindings implements AppBinding {
+  @override
+  void dependencies() {
     Get.lazyPut(() => RegisterPageController(), fenix: true);
   }
 
-  static void destroy() {
+  @override
+  void destroy() {
     Get.delete<RegisterPageController>();
   }
 }
