@@ -39,6 +39,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Para usar na sua foto de perfil.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Para usar na sua foto de perfil.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Esta permissão é usada por uma API.</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>
