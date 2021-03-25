@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sync_play/ui/components/cupertino_list_tile.dart';
 import 'package:sync_play/ui/components/default_spacer.dart';
 import 'package:sync_play/ui/components/list_tile_builder.dart';
 import 'package:sync_play/ui/pages/home/tabs/profile/profile_tab_controller.dart';
@@ -90,59 +91,23 @@ class ProfileSection extends StatelessWidget {
             DefaultSpacer(),
             ListTileBuilder(
               children: [
-                GestureDetector(
-                  onTap: () => controller.handleGoToEdit(context),
-                  child: ListTile(
-                    tileColor: CupertinoTheme.of(context).barBackgroundColor,
-                    title: Text(
-                      'Nome',
-                      style: CupertinoTheme.of(context).textTheme.textStyle,
-                    ),
-                    trailing: Icon(
-                      CupertinoIcons.chevron_forward,
-                      color: CupertinoTheme.of(context)
-                          .textTheme
-                          .tabLabelTextStyle
-                          .color,
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () => controller.handleGoToHistoryPage(context),
-                  child: ListTile(
-                    tileColor: CupertinoTheme.of(context).barBackgroundColor,
-                    title: Text(
-                      'Histórico',
-                      style: CupertinoTheme.of(context).textTheme.textStyle,
-                    ),
-                    trailing: Icon(
-                      CupertinoIcons.chevron_forward,
-                      color: CupertinoTheme.of(context)
-                          .textTheme
-                          .tabLabelTextStyle
-                          .color,
-                    ),
-                  ),
-                ),
+                CupertinoListTile(
+                    title: 'Nome',
+                    onTap: () => controller.handleGoToEdit(context)),
+                CupertinoListTile(
+                    title: 'Histórico',
+                    onTap: () => controller.handleGoToHistoryPage(context)),
               ],
             ),
             DefaultSpacer(),
             ListTileBuilder(
               children: [
-                GestureDetector(
+                CupertinoListTile(
+                  title: 'Sair',
                   onTap: () => controller.handleLogout(context),
-                  child: ListTile(
-                    tileColor: CupertinoTheme.of(context).barBackgroundColor,
-                    title: Text(
-                      'Sair',
-                      style: CupertinoTheme.of(context)
-                          .textTheme
-                          .textStyle
-                          .copyWith(color: CupertinoColors.destructiveRed),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
+                  textColor: CupertinoColors.destructiveRed,
+                  center: true,
+                )
               ],
             ),
           ],
