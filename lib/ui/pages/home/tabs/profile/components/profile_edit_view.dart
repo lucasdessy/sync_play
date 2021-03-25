@@ -33,7 +33,10 @@ class ProfileEditView extends StatelessWidget {
           child: ListView(
             controller: ModalScrollController.of(context),
             children: [
-              CupertinoFormSection.insetGrouped(children: [Text('a')])
+              DefaultLabel('Nome'),
+              CupertinoTextField(
+                controller: controller.nameController,
+              )
             ],
           ),
         ),
