@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sync_play/ui/components/cupertino_list_tile.dart';
 import 'package:sync_play/ui/components/default_spacer.dart';
 import 'package:sync_play/ui/components/list_tile_builder.dart';

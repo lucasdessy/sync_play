@@ -8,7 +8,14 @@ import 'package:sync_play/ui/pages/home/tabs/profile/profile_tab_controller.dart
 
 class ProfileEditView extends StatelessWidget {
   final ProfileTabController controller;
-
+  static final BorderSide _kDefaultRoundedBorderSide = BorderSide(
+    color: CupertinoDynamicColor.withBrightness(
+      color: Color(0x33000000),
+      darkColor: Color(0x33FFFFFF),
+    ),
+    style: BorderStyle.solid,
+    width: 0.0,
+  );
   const ProfileEditView({Key? key, required this.controller}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -36,6 +43,17 @@ class ProfileEditView extends StatelessWidget {
               DefaultLabel('Nome'),
               CupertinoTextField(
                 controller: controller.nameController,
+                decoration: BoxDecoration(
+                  color: CupertinoColors.secondarySystemGroupedBackground
+                      .resolveFrom(context),
+                  border: Border(
+                    top: _kDefaultRoundedBorderSide,
+                    bottom: _kDefaultRoundedBorderSide,
+                    left: _kDefaultRoundedBorderSide,
+                    right: _kDefaultRoundedBorderSide,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                ),
               )
             ],
           ),
