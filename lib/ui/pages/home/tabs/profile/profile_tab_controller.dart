@@ -23,12 +23,15 @@ class ProfileTabController extends GetxController {
   void handleGoToEdit(BuildContext context) {
     nameController.text = userName;
     showCupertinoModalBottomSheet(
-        context: context,
-        builder: (context) => ProfileEditView(
-              controller: this,
-            ),
-        animationCurve: Curves.easeInOutCirc,
-        duration: Duration(milliseconds: 400));
+      context: context,
+      builder: (context) => ProfileEditView(
+        controller: this,
+      ),
+      animationCurve: Curves.easeInOutCirc,
+      duration: Duration(milliseconds: 400),
+      enableDrag: true,
+      bounce: true,
+    );
   }
 
   Future<void> handleLogout(BuildContext context) async {
