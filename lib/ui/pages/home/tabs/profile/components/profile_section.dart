@@ -51,7 +51,7 @@ class ProfileSection extends StatelessWidget {
             ),
             DefaultSpacer(),
             Text(
-              controller.userName ?? 'Sem nome',
+              controller.userName,
               textAlign: TextAlign.start,
               style: CupertinoTheme.of(context)
                   .textTheme
@@ -59,7 +59,7 @@ class ProfileSection extends StatelessWidget {
                   .copyWith(fontSize: 24, fontWeight: FontWeight.w300),
             ),
             Text(
-              controller.userEmail ?? 'Sem email',
+              controller.userEmail,
               textAlign: TextAlign.start,
               style: CupertinoTheme.of(context)
                   .textTheme

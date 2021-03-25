@@ -140,4 +140,26 @@ class AuthService extends GetxService {
       setLoading(false);
     }
   }
+
+  Future<void> updateUser({String? name, String? profilePicUrl}) async {
+    try {
+      setLoading(true);
+      if (!(isLoggedin() ?? false)) {
+        throw AppError('Não é possível editar informações',
+            errorDetails: 'O usuário não está logado');
+      }
+      final _user = currentUser();
+      _user!.name = name ?? _user.name;
+      _user.profilePicUrl = profilePicUrl ?? _user.profilePicUrl;
+      await _firestore
+          .collection('users')
+          .doc(authUser()!.uid)
+          .update(_user.toJson());
+      currentUser.value = _user;
+    } catch (e) {
+      throw AppError('Ocorreu um erro interno');
+    } finally {
+      setLoading(false);
+    }
+  }
 }
