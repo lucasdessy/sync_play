@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -15,11 +16,15 @@ import 'package:sync_play/util/single_instance_function.dart';
 class UserService extends GetxService {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
+  final _messaging = FirebaseMessaging.instance;
+
   final Rx<User?> authUser = Rx<User?>();
   final Rx<FireUser?> currentUser = Rx<FireUser?>();
   final RxBool isLoggedin = RxBool();
   final RxBool loading = false.obs;
+
   final _appService = Get.find<AppService>();
+
   late final SingleInstanceFunction _loadUserSingle;
   @override
   void onInit() {
@@ -66,6 +71,7 @@ class UserService extends GetxService {
       if (snap.exists) {
         print('_loadUser: loading existing user...');
         currentUser.value = FireUser.fromDocument(snap);
+        await _updateUserToken();
       } else {
         print('_loadUser: creating new user...');
         await _createUser(_user.uid);
@@ -76,6 +82,17 @@ class UserService extends GetxService {
 
   Future<void> _createUser(String userId) async {
     await _firestore.collection('users').doc(userId).set(FireUser().toJson());
+  }
+
+  Future<void> _updateUserToken() async {
+    print('_updateUserToken: requesting notification permission');
+    final _setting = await _messaging.requestPermission();
+    if (_setting.authorizationStatus != AuthorizationStatus.denied) {
+      print(
+          '_updateUserToken: got notification permission... sending token to server');
+      final _token = await _messaging.getToken();
+      await updateUser(token: _token);
+    }
   }
 
   Future<void> register(
@@ -141,7 +158,8 @@ class UserService extends GetxService {
     }
   }
 
-  Future<void> updateUser({String? name, String? profilePicUrl}) async {
+  Future<void> updateUser(
+      {String? name, String? profilePicUrl, String? token}) async {
     try {
       setLoading(true);
       if (!(isLoggedin() ?? false)) {
@@ -151,11 +169,13 @@ class UserService extends GetxService {
       final _user = currentUser();
       _user!.name = name ?? _user.name;
       _user.profilePicUrl = profilePicUrl ?? _user.profilePicUrl;
+      _user.token = token ?? _user.token;
       await _firestore
           .collection('users')
           .doc(authUser()!.uid)
           .update(_user.toJson());
       currentUser.value = _user;
+      currentUser.refresh();
     } catch (e) {
       throw AppError('Ocorreu um erro interno');
     } finally {
