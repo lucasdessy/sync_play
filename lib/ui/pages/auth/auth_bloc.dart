@@ -3,7 +3,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get.dart';
 import 'package:sync_play/models/app_binding.dart';
 import 'package:sync_play/models/app_error.dart';
-import 'package:sync_play/services/auth_service.dart';
+import 'package:sync_play/services/user_service.dart';
 import 'package:sync_play/services/route_service.dart';
 import 'package:sync_play/util/util.dart';
 

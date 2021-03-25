@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sync_play/models/app_error.dart';
 import 'package:sync_play/services/app_service.dart';
-import 'package:sync_play/services/auth_service.dart';
+import 'package:sync_play/services/user_service.dart';
 import 'package:sync_play/services/route_service.dart';
 import 'package:sync_play/ui/pages/history/history_bloc.dart';
 import 'package:sync_play/ui/pages/home/tabs/profile/components/choose_profile_picture_sheet.dart';

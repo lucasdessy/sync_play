@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sync_play/models/app_error.dart';
-import 'package:sync_play/services/auth_service.dart';
+import 'package:sync_play/services/user_service.dart';
 import 'package:sync_play/ui/pages/auth/auth_bloc.dart';
 import 'package:sync_play/ui/pages/home/home_bindings.dart';
 import 'package:sync_play/ui/pages/register/register_bloc.dart';
