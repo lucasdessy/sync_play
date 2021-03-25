@@ -22,7 +22,7 @@ class DiscardEditSheet extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).pop<bool>(false);
         },
-        child: Text('Dispensar'),
+        child: Text('Cancelar'),
       ),
     );
   }

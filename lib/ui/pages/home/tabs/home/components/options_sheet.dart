@@ -24,7 +24,7 @@ class OptionsSheet extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).pop();
         },
-        child: Text('Dispensar'),
+        child: Text('Cancelar'),
       ),
     );
   }

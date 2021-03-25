@@ -18,7 +18,9 @@ class ProfileSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             DefaultSpacer(),
-            CircleAvatar(
+            GestureDetector(
+              onTap: () => controller.handleChangeProfilePicture(context),
+              child: CircleAvatar(
                 radius: 45,
                 backgroundColor: CupertinoTheme.of(context)
                     .textTheme
@@ -56,8 +58,8 @@ class ProfileSection extends StatelessWidget {
                                       .textTheme
                                       .textStyle
                                       .copyWith(
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.w100,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w200,
                                           color: Colors.white),
                                 )),
                           ),
@@ -65,7 +67,9 @@ class ProfileSection extends StatelessWidget {
                       ),
                     ),
                   ],
-                )),
+                ),
+              ),
+            ),
             DefaultSpacer(),
             Text(
               controller.userName,
