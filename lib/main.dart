@@ -14,5 +14,5 @@ void main() async {
 
 void initializeServices() {
   Get.put(AppService());
-  Get.put(AuthService());
+  Get.put(UserService());
 }

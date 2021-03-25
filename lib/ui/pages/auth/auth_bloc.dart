@@ -20,10 +20,10 @@ class AuthBindings implements AppBinding {
 }
 
 class AuthPageController extends GetxController {
-  final _authService = Get.find<AuthService>();
+  final _userService = Get.find<UserService>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
-  bool get loading => _authService.loading() ?? false;
+  bool get loading => _userService.loading() ?? false;
 
   Future<void> handleLogin(BuildContext context) async {
     try {
@@ -31,7 +31,7 @@ class AuthPageController extends GetxController {
         throw AppError('Não é possível fazer login',
             errorDetails: 'Digite um email válido.');
       }
-      await _authService.login(
+      await _userService.login(
           email: emailController.text, password: passController.text);
     } on AppError catch (e) {
       Util.showError(e, context);
@@ -44,7 +44,7 @@ class AuthPageController extends GetxController {
         throw AppError('Não é possível recuperar a senha',
             errorDetails: 'Digite um email válido.');
       }
-      await _authService.recoverPassword(
+      await _userService.recoverPassword(
         email: emailController.text,
       );
       Util.showSnackbar(context,

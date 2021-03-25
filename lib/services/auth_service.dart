@@ -12,7 +12,7 @@ import 'package:sync_play/ui/pages/home/home_bindings.dart';
 import 'package:sync_play/ui/pages/register/register_bloc.dart';
 import 'package:sync_play/util/single_instance_function.dart';
 
-class AuthService extends GetxService {
+class UserService extends GetxService {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   final Rx<User?> authUser = Rx<User?>();
