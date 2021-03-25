@@ -34,7 +34,10 @@ dependencies:
   firebase_storage: ^8.0.0
   firebase_messaging: ^9.0.1
 
+  # Might change it later
   chewie: ^1.0.0
+  video_player: ^2.0.2
+
   get: ^4.0.0-nullsafety.2
   pedantic: ^1.11.0
   modal_bottom_sheet: ^2.0.0
