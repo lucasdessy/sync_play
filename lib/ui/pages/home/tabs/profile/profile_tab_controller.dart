@@ -6,6 +6,8 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sync_play/models/app_error.dart';
 import 'package:sync_play/services/app_service.dart';
 import 'package:sync_play/services/auth_service.dart';
+import 'package:sync_play/services/route_service.dart';
+import 'package:sync_play/ui/pages/history/history_bloc.dart';
 import 'package:sync_play/ui/pages/home/tabs/profile/components/choose_profile_picture_sheet.dart';
 import 'package:sync_play/ui/pages/home/tabs/profile/components/discard_edit_sheet.dart';
 import 'package:sync_play/ui/pages/home/tabs/profile/components/logout_sheet.dart';
@@ -36,6 +38,12 @@ class ProfileTabController extends GetxController {
       enableDrag: true,
       bounce: true,
     );
+  }
+
+  Future<void> handleGoToHistoryPage(BuildContext context) async {
+    HistoryPageBindings().dependencies();
+    await Navigator.of(context).pushNamed(RouteService.HISTORY);
+    HistoryPageBindings().destroy();
   }
 
   Future<void> handleLogout(BuildContext context) async {

@@ -108,7 +108,7 @@ class ProfileSection extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () => controller.handleGoToHistoryPage(context),
                   child: ListTile(
                     tileColor: CupertinoTheme.of(context).barBackgroundColor,
                     title: Text(
