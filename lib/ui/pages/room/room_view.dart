@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sync_play/models/room.dart';
 import 'package:sync_play/ui/pages/room/components/chat_builder.dart';
 import 'package:sync_play/ui/pages/room/components/player.dart';
 import 'room_bloc.dart';
@@ -8,9 +9,14 @@ import 'room_bloc.dart';
 class RoomView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var roomName = '';
+    final args = ModalRoute.of(context)?.settings.arguments;
+    if (args is Room) {
+      roomName = args.roomName;
+    }
     return GetBuilder<RoomController>(
       init: Get.put(
-        RoomController(),
+        RoomController(context),
       ),
       dispose: (state) {
         Get.find<RoomController>().disposeControllers();
@@ -18,10 +24,10 @@ class RoomView extends StatelessWidget {
       },
       builder: (c) => CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
-          middle: Text('Sala'),
+          middle: Text('$roomName'),
           trailing: CupertinoButton(
             padding: EdgeInsets.zero,
-            onPressed: () => c.changeResolution(context),
+            onPressed: () => c.changeResolution(),
             child: Icon(CupertinoIcons.settings),
           ),
         ),

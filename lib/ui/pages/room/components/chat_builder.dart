@@ -38,7 +38,7 @@ class ChatBuilder extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           child: DefaultPadding(
             child: CupertinoTextField(
-              padding: EdgeInsets.zero,
+              placeholder: 'Chat ainda não funcional',
               suffix: CupertinoButton(
                 onPressed: () {},
                 padding: EdgeInsets.zero,

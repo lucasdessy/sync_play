@@ -3,26 +3,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sync_play/models/app_binding.dart';
+import 'package:sync_play/models/room.dart';
 import 'package:sync_play/ui/pages/room/components/resolutions_sheet.dart';
 import 'package:sync_play/util/single_instance_function.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
-class RoomBindings implements AppBinding {
-  @override
-  void dependencies() {
-    Get.put(RoomController());
-  }
-
+class RoomBindings extends AppBinding {
   @override
   void destroy() {
     Get.delete<RoomController>();
   }
+
+  @override
+  void dependencies() {}
 }
 
 class RoomController extends GetxController {
   Duration totalDuration = Duration(minutes: 1);
   Duration currentPosition = Duration.zero;
+
+  final BuildContext context;
+  late Room room;
 
   final dCurrentPosition = 0.0.obs;
 
@@ -31,6 +33,8 @@ class RoomController extends GetxController {
 
   late SingleInstanceFunction _updateSeekUiSingle;
   List<MuxedStreamInfo>? resolutions;
+
+  RoomController(this.context);
   bool get showButtons =>
       !(videoPlayerController?.value.isPlaying ?? false) || _showButtons;
   var _showButtons = false;
@@ -38,7 +42,11 @@ class RoomController extends GetxController {
   @override
   void onInit() {
     _updateSeekUiSingle = SingleInstanceFunction(_updateSeekUi);
-    _initializePlayer();
+    final args = ModalRoute.of(context)?.settings.arguments;
+    if (args is Room) {
+      room = args;
+      _initializePlayer();
+    }
     super.onInit();
   }
 
@@ -57,8 +65,8 @@ class RoomController extends GetxController {
   Future<void> _initializePlayer([MuxedStreamInfo? info]) async {
     late String _url;
     if (info == null) {
-      final manifest = await yt.videos.streamsClient
-          .getManifest('https://www.youtube.com/watch?v=IjeHpNJfZpc');
+      final manifest =
+          await yt.videos.streamsClient.getManifest('${room.roomLink}');
       resolutions = manifest.muxed.toList();
       _url = manifest.muxed.withHighestBitrate().url.toString();
     } else {
@@ -125,7 +133,7 @@ class RoomController extends GetxController {
     update(['player']);
   }
 
-  Future<void> changeResolution(BuildContext context) async {
+  Future<void> changeResolution() async {
     if (resolutions != null) {
       final result = await showCupertinoModalPopup<MuxedStreamInfo?>(
         context: context,
