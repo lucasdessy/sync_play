@@ -8,7 +8,7 @@ import 'package:sync_play/ui/pages/room/room_view.dart';
 import 'package:sync_play/ui/pages/splash/splash_view.dart';
 
 class RouteService {
-  static const SPLASH = '/splash';
+  static const SPLASH = '/';
   static const HOME = '/home';
   static const AUTH = '/login';
   static const REGISTER = '/register';
