@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sync_play/ui/pages/room/components/chat_builder.dart';
 import 'package:video_player/video_player.dart';
 
 import 'room_bloc.dart';
@@ -44,7 +45,8 @@ class RoomView extends StatelessWidget {
                   ),
                   Text(formatDuration(controller.totalDuration)),
                 ],
-              )
+              ),
+              Expanded(child: ChatBuilder()),
             ],
           );
         },
