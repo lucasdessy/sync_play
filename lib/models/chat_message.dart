@@ -12,7 +12,7 @@ class ChatMessage {
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'content': content,
-        'user': user?.toJson(),
+        'user': user?.toJson() ?? FireUser(name: 'Erro').toJson(),
         'roomId': roomId,
       };
 

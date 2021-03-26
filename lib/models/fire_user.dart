@@ -4,7 +4,7 @@
 import 'package:sync_play/services/app_service.dart';
 
 class FireUser {
-  String? id;
+  // String? id;
   String? name;
   late String profilePicUrl;
   String? token;
