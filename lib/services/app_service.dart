@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sync_play/models/app_error.dart';
-import 'package:sync_play/services/auth_service.dart';
+import 'package:sync_play/services/user_service.dart';
 import 'package:sync_play/ui/pages/auth/auth_bloc.dart';
 import 'package:sync_play/ui/pages/home/home_bindings.dart';
 import 'package:sync_play/ui/pages/register/register_bloc.dart';
@@ -19,7 +19,7 @@ class AppService extends GetxService {
   final _picker = ImagePicker();
   final _storage = FirebaseStorage.instance;
   final RxBool loading = false.obs;
-  late final AuthService _authService;
+  late final UserService _userService;
   final uuid = Uuid();
 
   void _loadInitialBindings() {
@@ -31,7 +31,7 @@ class AppService extends GetxService {
   @override
   void onReady() {
     _loadInitialBindings();
-    _authService = Get.find<AuthService>();
+    _userService = Get.find<UserService>();
     super.onReady();
   }
 
@@ -51,7 +51,7 @@ class AppService extends GetxService {
     try {
       setLoading(true);
       final task =
-          _storage.ref('users/${_authService.authUser()?.uid}/${uuid.v4()}');
+          _storage.ref('users/${_userService.authUser()?.uid}/${uuid.v4()}');
       await task.putFile(file);
       return task.getDownloadURL();
     } catch (e) {

@@ -9,11 +9,8 @@ class ListTileSpacer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height:
-          CupertinoTheme.brightnessOf(context) == Brightness.light ? 0.4 : 1,
-      color: CupertinoTheme.brightnessOf(context) == Brightness.light
-          ? Color(0xffbfbfbf)
-          : Color(0xff282828),
+      height: .5,
+      color: CupertinoColors.separator.resolveFrom(context),
     );
   }
 }

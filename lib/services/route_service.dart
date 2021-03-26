@@ -3,15 +3,19 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sync_play/ui/pages/auth/auth_view.dart';
 import 'package:sync_play/ui/pages/history/history_view.dart';
 import 'package:sync_play/ui/pages/home/home_view.dart';
+import 'package:sync_play/ui/pages/new_room/new_room_view.dart';
 import 'package:sync_play/ui/pages/register/register_view.dart';
+import 'package:sync_play/ui/pages/room/room_view.dart';
 import 'package:sync_play/ui/pages/splash/splash_view.dart';
 
 class RouteService {
-  static const SPLASH = '/splash';
+  static const SPLASH = '/';
   static const HOME = '/home';
   static const AUTH = '/login';
   static const REGISTER = '/register';
   static const HISTORY = '/history';
+  static const ROOM = '/room';
+  static const NEW_ROOM = '/room/new';
 
   static final routes = <String, WidgetBuilder>{
     SPLASH: (ctx) => SplashView(),
@@ -19,13 +23,15 @@ class RouteService {
     AUTH: (ctx) => AuthView(),
     REGISTER: (ctx) => RegisterView(),
     HISTORY: (ctx) => HistoryView(),
+    ROOM: (ctx) => RoomView(),
+    NEW_ROOM: (ctx) => NewRoomView(),
   };
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     if (routes[settings.name] != null) {
       return MaterialWithModalsPageRoute(
           settings: settings, builder: routes[settings.name]!);
     }
-    return MaterialWithModalsPageRoute(
-        settings: settings, builder: (context) => Container());
+    print('going to uknown route... ${settings.name}');
+    return null;
   }
 }
