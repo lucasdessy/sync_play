@@ -21,7 +21,7 @@ class ChatBuilder extends StatelessWidget {
         Align(
           alignment: Alignment.topCenter,
           child: Padding(
-            padding: EdgeInsets.only(bottom: 40, top: 0),
+            padding: EdgeInsets.only(bottom: 70, top: 0),
             child: ListView.separated(
               itemCount: teste.length,
               itemBuilder: (context, index) {
@@ -36,6 +36,7 @@ class ChatBuilder extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           child: DefaultPadding(
             child: CupertinoTextField(
+              padding: EdgeInsets.zero,
               suffix: CupertinoButton(
                 onPressed: () {},
                 padding: EdgeInsets.zero,
