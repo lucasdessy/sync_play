@@ -36,15 +36,18 @@ dependencies:
   firebase_messaging: ^9.0.1
 
   # Might change it later
-  chewie: ^1.0.0
   video_player: ^2.0.2
-
+  better_player: ^0.0.63
+  youtube_explode_dart: ^1.9.0
+  
   get: ^4.0.0-nullsafety.2
   pedantic: ^1.11.0
   modal_bottom_sheet: ^2.0.0
   image_picker: ^0.7.3
   image_cropper: ^1.4.0
   uuid: ^3.0.2
+  path_provider: ^2.0.1
+
   # intl: ^0.17.0
 
 dev_dependencies:

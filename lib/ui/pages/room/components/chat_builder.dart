@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sync_play/models/chat_message.dart';
@@ -10,7 +12,7 @@ class ChatBuilder extends StatelessWidget {
     20,
     (index) => ChatMessage(
       roomId: '1234',
-      content: 'teste $index',
+      content: Random().nextBool() ? 'Poggers rafis' : 'KURWA',
       isSender: index.isEven,
     ),
   );
