@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get.dart';
+import 'package:sync_play/services/route_service.dart';
 import 'package:sync_play/ui/pages/home/tabs/home/components/options_sheet.dart';
+import 'package:sync_play/ui/pages/room/room_bloc.dart';
 
 class HomeTabController extends GetxController {
   void handleShowOptions(BuildContext context) {
@@ -11,9 +13,17 @@ class HomeTabController extends GetxController {
 
   void handleCreateRoom(BuildContext context) {
     Navigator.of(context).pop();
+    _goToRoom(context);
   }
 
   void handleJoinRoom(BuildContext context) {
     Navigator.of(context).pop();
+    _goToRoom(context);
+  }
+
+  void _goToRoom(BuildContext context) async {
+    RoomBindings().dependencies();
+    await Navigator.of(context).pushNamed(RouteService.ROOM);
+    RoomBindings().destroy();
   }
 }
