@@ -70,7 +70,7 @@ class UserService extends GetxService {
       final snap = await _firestore.collection('users').doc(_user.uid).get();
       if (snap.exists) {
         print('_loadUser: loading existing user...');
-        currentUser.value = FireUser.fromDocument(snap);
+        currentUser.value = FireUser.fromJson(snap.data());
         await _updateUserToken();
       } else {
         print('_loadUser: creating new user...');

@@ -1,7 +1,6 @@
 // Sim, nome estranho, só para difernciar o user do Auth
 // com o user do firestore
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sync_play/services/app_service.dart';
 
 class FireUser {
@@ -18,9 +17,9 @@ class FireUser {
         'token': token,
       };
 
-  FireUser.fromDocument(DocumentSnapshot snapshot) {
-    name = snapshot.data()?['name'];
-    profilePicUrl = snapshot.data()?['profilePicUrl'];
-    token = snapshot.data()?['token'];
+  FireUser.fromJson(Map<String, dynamic>? snapshot) {
+    name = snapshot?['name'];
+    profilePicUrl = snapshot?['profilePicUrl'] ?? AppService.defaultProfilePic;
+    token = snapshot?['token'];
   }
 }
