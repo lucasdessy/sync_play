@@ -23,7 +23,7 @@ class AuthPageController extends GetxController {
   final _userService = Get.find<UserService>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
-  bool get loading => _userService.loading() ?? false;
+  bool get loading => _userService.loading();
 
   Future<void> handleLogin(BuildContext context) async {
     try {

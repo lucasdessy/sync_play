@@ -21,8 +21,7 @@ class ProfileTabController extends GetxController {
   String get userEmail => _userService.authUser()?.email ?? 'Sem email';
   String get userPic =>
       _userService.currentUser()?.profilePicUrl ?? AppService.defaultProfilePic;
-  bool get loading =>
-      (_userService.loading() ?? false) || (_appService.loading() ?? false);
+  bool get loading => (_userService.loading()) || (_appService.loading());
 
   final nameController = TextEditingController();
 

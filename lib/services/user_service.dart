@@ -18,9 +18,9 @@ class UserService extends GetxService {
   final _firestore = FirebaseFirestore.instance;
   final _messaging = FirebaseMessaging.instance;
 
-  final Rx<User?> authUser = Rx<User?>();
-  final Rx<FireUser?> currentUser = Rx<FireUser?>();
-  final RxBool isLoggedin = RxBool();
+  final Rx<User?> authUser = Rx<User?>(null);
+  final Rx<FireUser?> currentUser = Rx<FireUser?>(null);
+  final RxBool isLoggedin = RxBool(false);
   final RxBool loading = false.obs;
 
   final _appService = Get.find<AppService>();
@@ -162,7 +162,7 @@ class UserService extends GetxService {
       {String? name, String? profilePicUrl, String? token}) async {
     try {
       setLoading(true);
-      if (!(isLoggedin() ?? false)) {
+      if (!(isLoggedin())) {
         throw AppError('Não é possível editar informações',
             errorDetails: 'O usuário não está logado');
       }

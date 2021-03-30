@@ -98,7 +98,7 @@ class Player extends StatelessWidget {
                               child: CupertinoSlider(
                                 // value: controller.currentPosition.inMilliseconds
                                 //     .toDouble(),
-                                value: controller.dCurrentPosition() ?? 0,
+                                value: controller.dCurrentPosition(),
                                 onChanged: controller.changePosition,
                                 onChangeEnd: controller.seekTo,
                                 max: controller.totalDuration.inMilliseconds

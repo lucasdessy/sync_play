@@ -21,7 +21,7 @@ class RegisterPageController extends GetxController {
   final _userService = Get.find<UserService>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
-  bool get loading => _userService.loading() ?? false;
+  bool get loading => _userService.loading();
   Future<void> handleRegister(BuildContext context) async {
     try {
       if (emailController.text.isEmpty || !emailController.text.isEmail) {
